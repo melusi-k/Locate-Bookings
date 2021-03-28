@@ -31,19 +31,26 @@ class HotelListHolder extends StatefulWidget {
 }
 
 class MyState extends State<HotelListHolder> {
-
-  List questions;
-  String endpoint = "https://api.stackexchange.com/2.2/questions?" +
-      "pagesize=100&order=desc&sort=activity&site=stackoverflow";
-      
-      
-      List hotels;
+    List hotels;
     String impala_sandbox = "https://sandbox.impala.travel/v1/hotels?" + "size=100&offset=0&sortBy=createdAt%3Adesc";
     
     String key = "sandb_axEy3j9mcCVw0RyQjCxgerFAt9vJuvCyL3FUKj3v";
 
   @override
   Widget build(BuildContext context) {
+  
+   GridView myGrid= GridView.builder(
+        itemCount: questions == null ? 0 : questions.length,
+        itemBuilder: (BuildContext context, int index) {
+          return new ListTile(
+            leading: FlutterLogo(),
+            title: Text(questions[index]["name"]),
+            subtitle: Text(questions[index]["description"].toString()),
+            trailing: Icon(Icons.more_vert),
+            isThreeLine: true
+          );
+        }
+    );
     
     ListView myList = ListView.builder(
         itemCount: questions == null ? 0 : questions.length,
@@ -120,7 +127,7 @@ class MyState extends State<HotelListHolder> {
     {
         Map jsonData = json.decode(response.body);
          setState(() {
-         questions = jsonData["data"];
+         hotels = jsonData["data"];
     });
         
     } else{
