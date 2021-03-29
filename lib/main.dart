@@ -33,47 +33,30 @@ class HotelListHolder extends StatefulWidget {
 class MyState extends State<HotelListHolder> {
     List hotels;
     String impala_sandbox = "https://sandbox.impala.travel/v1/hotels?" + "size=100&offset=0&sortBy=createdAt%3Adesc";
-    
+
     String key = "sandb_axEy3j9mcCVw0RyQjCxgerFAt9vJuvCyL3FUKj3v";
 
   @override
   Widget build(BuildContext context) {
-  
-   GridView myGrid= GridView.builder(
-        itemCount: questions == null ? 0 : questions.length,
-        itemBuilder: (BuildContext context, int index) {
-          return new ListTile(
-            leading: FlutterLogo(),
-            title: Text(questions[index]["name"]),
-            subtitle: Text(questions[index]["description"].toString()),
-            trailing: Icon(Icons.more_vert),
-            isThreeLine: true
-          );
-        }
-    );
-    
     ListView myList = ListView.builder(
-        itemCount: questions == null ? 0 : questions.length,
+        itemCount: hotels == null ? 0 : hotels.length,
         itemBuilder: (BuildContext context, int index) {
           return new ListTile(
             leading: FlutterLogo(),
-            title: Text(questions[index]["name"]),
-            subtitle: Text(questions[index]["description"].toString()),
+            title: Text(hotels[index]["name"]),
+            subtitle: Text(hotels[index]["createdAt"].toString()),
             trailing: Icon(Icons.more_vert),
             isThreeLine: true
           );
         }
     );
-    
+
     return new Scaffold(
         appBar: new AppBar(
             title: new Text("Locate Bookings")
         ),
         body: myList,
         drawer: new Drawer(
-  // Add a ListView to the drawer. This ensures the user can scroll
-  // through the options in the drawer if there isn't enough vertical
-  // space to fit everything.
   child: ListView(
     padding: EdgeInsets.zero,
     children: <Widget>[
@@ -138,7 +121,11 @@ class MyState extends State<HotelListHolder> {
 
 
 class Hotel{
-    
+String hotelId;
+String name;
+String starRating;
+String roomCount;
+String termsAndConditions;
 }
 
 
